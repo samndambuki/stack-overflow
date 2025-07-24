@@ -1,4 +1,17 @@
 {
-    "users":[],
-    "questions":[]
+  "users": [
+    {
+      "id": "6899",
+      "email": "sam@gmail.com",
+      "username": "sam",
+      "password": "12334595"
+    },
+    {
+      "id": "5507",
+      "email": "samuel@gmail.com",
+      "username": "samuel",
+      "password": "098765"
+    }
+  ],
+  "questions": []
 }

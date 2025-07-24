@@ -49,7 +49,7 @@
              }
           </div>
         <div class="d-flex flex-column justify-content-center align-items-center mt-4">
-        <button (click)="onSubmit()" type="submit" class="btn btn-success" [disabled]="createAccountForm.invalid">Create Account</button>
+        <button (click)="onSubmit()" type="submit" class="btn btn-success" [disabled]="createAccountForm.invalid" (click)="createAccount()">Create Account</button>
         <p class="mt-2">{{submissionStatus()}}</p>
         <p class="m-2">OR</p>
         <button type="button" class="btn btn-primary" routerLink="/login">Login</button>
