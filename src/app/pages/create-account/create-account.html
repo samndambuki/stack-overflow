@@ -21,8 +21,8 @@
         >
         <!-- validation messages  -->
         <div *ngIf="createAccountForm.get('username')?.invalid && (createAccountForm.get('username')?.touched) || (createAccountForm.get('username')?.dirty)">
-              <div *ngIf="createAccountForm.get('username')?.errors?.['required']" class="alert alert-danger">Password is required</div>
-              <div *ngIf="createAccountForm.get('username')?.errors?.['maxlength']" class="alert alert-danger">You exceeded the maximum length for username</div>
+              <div *ngIf="createAccountForm.get('username')?.errors?.['required']" class="alert alert-danger">Username is required</div>
+              <div *ngIf="createAccountForm.get('username')?.errors?.['maxlength']" class="alert alert-danger">Username cannot be longer than 12 characters</div>
              </div>
         </div>
         <div class="form-group mt-4">
@@ -37,7 +37,7 @@
              </div>
           </div>
         <div class="d-flex flex-column justify-content-center align-items-center mt-4">
-        <button type="submit" class="btn btn-success">Create Account</button>
+        <button type="submit" class="btn btn-success" [disabled]="createAccountForm.invalid">Create Account</button>
         <p class="m-2 font-weight-bold">OR</p>
         <button type="button" class="btn btn-primary" routerLink="/login">Login</button>
         </div>

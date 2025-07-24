@@ -30,7 +30,7 @@
              </div>
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center mt-4">
-        <button type="submit" class="btn btn-success">Login</button>
+        <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
         <p class="m-2 font-weight-bold">OR</p>
         <button type="button" class="btn btn-primary" routerLink="/create-account">Create Account</button>
         </div>
