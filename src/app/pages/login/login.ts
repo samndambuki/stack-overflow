@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -14,4 +14,13 @@ export class Login {
     email:new FormControl('',[Validators.required,Validators.email]),
     password:new FormControl('',[Validators.required,Validators.minLength(6)])
   })
+
+  submissionsStatus = signal<string|null>(null);
+  onSubmit(){
+    if(this.loginForm.valid){
+      this.submissionsStatus.set('login successful');
+    }else{
+      this.submissionsStatus.set('please fix form errors')
+    }
+  }
 }

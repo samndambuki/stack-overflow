@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -15,4 +15,15 @@ email:new FormControl('',[Validators.required,Validators.email]),
 username:new FormControl('',[Validators.required,Validators.maxLength(12)]),
 password:new FormControl('',[Validators.required,Validators.minLength(6)]),
 })
+
+submissionStatus = signal<string|null>(null);
+
+onSubmit(){
+  if(this.createAccountForm.valid){
+    this.submissionStatus.set('account created successfully')
+  }else{
+    this.submissionStatus.set('please fix form errors')
+  }
+}
+
 }
