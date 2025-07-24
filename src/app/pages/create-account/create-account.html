@@ -1,5 +1,5 @@
 <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center">
-<div class="card rounded p-5 w-25">
+<div class="card rounded p-4 w-100" style="max-width: 400px;">
   <div class="card-body">
     <h5 class="card-title d-flex justify-content-center">Create Account</h5>
     <form [formGroup]="createAccountForm">
@@ -51,7 +51,7 @@
         <div class="d-flex flex-column justify-content-center align-items-center mt-4">
         <button (click)="onSubmit()" type="submit" class="btn btn-success" [disabled]="createAccountForm.invalid">Create Account</button>
         <p class="mt-2">{{submissionStatus()}}</p>
-        <p class="m-2 font-weight-bold">OR</p>
+        <p class="m-2">OR</p>
         <button type="button" class="btn btn-primary" routerLink="/login">Login</button>
         </div>
     </form>
