@@ -6,35 +6,47 @@
         <div class="form-group mt-4">
         <label for="email">Email address</label>
         <input type="email" formControlName="email" class="form-control mt-2" id="email" placeholder="Enter your email"
-        [ngClass]="{'is-invalid':createAccountForm.get('email')?.invalid && (createAccountForm.get('email')?.touched) || createAccountForm.get('email')?.dirty}"
+        [ngClass]="{'is-invalid':createAccountForm.get('email')?.invalid && (createAccountForm.get('email')?.touched || createAccountForm.get('email')?.dirty)}"
         />
         <!-- validation messages  -->
-        <div *ngIf="createAccountForm.get('email')?.invalid && (createAccountForm.get('email')?.touched || (createAccountForm.get('email')?.dirty))">
-          <div *ngIf="createAccountForm.get('email')?.errors?.['required']" class="alert alert-danger">Email is required</div>
-          <div *ngIf="createAccountForm.get('email')?.errors?.['email']" class="alert alert-danger">Please enter a valid email</div>
-        </div>      
+        @if(createAccountForm.get('email')?.invalid && (createAccountForm.get('email')?.touched || createAccountForm.get('email')?.dirty)){
+          @if(createAccountForm.get('email')?.errors?.['required']){
+            <div class="alert alert-danger">Email is required</div>
+          }
+          @if(createAccountForm.get('email')?.errors?.['email']){
+            <div class="alert alert-danger">Please enter a valid email</div>
+          }
+        }
         </div>
         <div class="form-group mt-4">
         <label for="username">Username</label>
         <input type="username" formControlName="username" class="form-control mt-2" id="username" placeholder="Enter your username"
-        [ngClass]="{'is-invalid':createAccountForm.get('username')?.invalid && (createAccountForm.get('username')?.touched) || (createAccountForm.get('username')?.dirty)}"
+        [ngClass]="{'is-invalid':createAccountForm.get('username')?.invalid && (createAccountForm.get('username')?.touched || createAccountForm.get('username')?.dirty)}"
         >
         <!-- validation messages  -->
-        <div *ngIf="createAccountForm.get('username')?.invalid && (createAccountForm.get('username')?.touched) || (createAccountForm.get('username')?.dirty)">
-              <div *ngIf="createAccountForm.get('username')?.errors?.['required']" class="alert alert-danger">Username is required</div>
-              <div *ngIf="createAccountForm.get('username')?.errors?.['maxlength']" class="alert alert-danger">Username cannot be longer than 12 characters</div>
-             </div>
+        @if(createAccountForm.get('username')?.invalid && (createAccountForm.get('username')?.touched || createAccountForm.get('username')?.dirty)){
+         @if(createAccountForm.get('username')?.errors?.['required']){
+          <div class="alert alert-danger">Username is required</div>
+         }
+         @if(createAccountForm.get('username')?.errors?.['maxlength']){
+          <div class="alert alert-danger">Username cannot be longer than 12 characters</div>
+         }
+        }
         </div>
         <div class="form-group mt-4">
             <label for="password">Password</label>
             <input type="password" formControlName="password" class="form-control mt-2" id="password" placeholder="Enter your password"
-                    [ngClass]="{'is-invalid':createAccountForm.get('password')?.invalid && (createAccountForm.get('password')?.touched) || (createAccountForm.get('password')?.dirty)}"
+            [ngClass]="{'is-invalid':createAccountForm.get('password')?.invalid && (createAccountForm.get('password')?.touched || createAccountForm.get('password')?.dirty)}"
             />
-                <!-- validtion messages  -->
-                      <div *ngIf="createAccountForm.get('password')?.invalid && (createAccountForm.get('password')?.touched) || (createAccountForm.get('password')?.dirty)">
-              <div *ngIf="createAccountForm.get('password')?.errors?.['required']" class="alert alert-danger">Password is required</div>
-              <div *ngIf="createAccountForm.get('password')?.errors?.['minlength']" class="alert alert-danger">Passwword must be atleast 6 characters long</div>
-             </div>
+            <!-- validation messages  -->
+             @if(createAccountForm.get('password')?.invalid && (createAccountForm.get('password')?.touched || createAccountForm.get('password')?.dirty)){
+              @if(createAccountForm.get('password')?.errors?.['required']){
+                <div class="alert alert-danger">Password is required</div>
+              }
+              @if(createAccountForm.get('password')?.errors?.['minlength']){
+                <div class="alert alert-danger">Password must be atleast 6 characters long</div>
+              }
+             }
           </div>
         <div class="d-flex flex-column justify-content-center align-items-center mt-4">
         <button type="submit" class="btn btn-success" [disabled]="createAccountForm.invalid">Create Account</button>
@@ -42,7 +54,6 @@
         <button type="button" class="btn btn-primary" routerLink="/login">Login</button>
         </div>
     </form>
-    <!-- {{createAccountForm.value | json}} -->
   </div>
 </div>
 </div>
