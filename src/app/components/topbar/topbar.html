@@ -1,3 +1,6 @@
 <nav class="navbar bg-primary p-3">
  <a class="navbar-brand text-light">StackOverflow</a>
+ @if(isLoggedIn){
+ <button (click)="logout()" type="button" class="btn btn-danger">Logout</button>
+ }
 </nav>

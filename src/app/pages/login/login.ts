@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +16,32 @@ export class Login {
     password:new FormControl('',[Validators.required,Validators.minLength(6)])
   })
 
+  private userService  = inject(UserService);
+  private router = inject(Router);
+
   submissionsStatus = signal<string|null>(null);
-  onSubmit(){
+
+  login(){
     if(this.loginForm.valid){
-      this.submissionsStatus.set('login successful');
+      const {email,password} = this.loginForm.value;
+      this.userService.getUser(email ?? '').subscribe(
+        (users)=>{
+          const user = users.find(u=>u.password === password);
+          if(user){
+            localStorage.setItem('user',JSON.stringify(user));
+            this.submissionsStatus.set('login successful');
+            this.router.navigate(['home']);
+          }else{
+            this.submissionsStatus.set('Invalid email or password');
+          }
+        },
+      (error)=>{
+        this.submissionsStatus.set('Error logging in');
+        console.error(error);
+      }
+      )
     }else{
-      this.submissionsStatus.set('please fix form errors')
+      this.submissionsStatus.set('please fix form errors');
     }
   }
 }
