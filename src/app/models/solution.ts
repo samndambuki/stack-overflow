@@ -1,7 +1,7 @@
 export interface Solution{
     id:string;
     username:string;
-    upvotes:0;
-    downvotes:0;
+    upvotes:number;
+    downvotes:number;
     answer:string;
 }

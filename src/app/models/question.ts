@@ -4,5 +4,5 @@ export interface Question{
     id:string;
     username:string;
     question:string;
-    solutions:Solution[];
+    solutions?:Solution[];
 }

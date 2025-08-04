@@ -13,5 +13,16 @@
       "password": "098765"
     }
   ],
-  "questions": []
+  "questions": [
+    {
+      "id": "",
+      "username": "",
+      "question": "what is your favorite programming language?"
+    },
+    {
+      "id": "",
+      "username": "sam",
+      "question": "why is typescript used in angular?"
+    }
+  ]
 }

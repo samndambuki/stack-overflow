@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Question } from '../models/question';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
-  private baseUrl = 'https://localhost:3000';
+  private baseUrl = 'http://localhost:3000';
   private http = inject(HttpClient);
-  postQuestion(question:string){
-    return this.http.post(`${this.baseUrl}/questions`,question)
+  postQuestion(question:Question):Observable<Question>{
+    return this.http.post<Question>(`${this.baseUrl}/questions`,question)
   }
 }

@@ -25,20 +25,22 @@ export class Login {
     if(this.loginForm.valid){
       const {email,password} = this.loginForm.value;
       this.userService.getUser(email ?? '').subscribe(
-        (users)=>{
+        {
+          next:(users)=>{
           const user = users.find(u=>u.password === password);
           if(user){
+            this.userService.setUser(user);
             localStorage.setItem('user',JSON.stringify(user));
             this.submissionsStatus.set('login successful');
             this.router.navigate(['home']);
           }else{
             this.submissionsStatus.set('Invalid email or password');
           }
-        },
-      (error)=>{
-        this.submissionsStatus.set('Error logging in');
-        console.error(error);
-      }
+          },
+          error:(error)=>{
+            this.submissionsStatus.set('Error logging in');
+          }
+        }
       )
     }else{
       this.submissionsStatus.set('please fix form errors');
