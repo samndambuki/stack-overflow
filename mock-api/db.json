@@ -28,6 +28,24 @@
       "id": "",
       "username": "sam",
       "question": "what is spring framework?"
+    },
+    {
+      "id": "",
+      "username": "sam",
+      "question": "is java used in spring?",
+      "solutions": []
+    },
+    {
+      "id": "22dc",
+      "username": "sam",
+      "question": "what is the diffeence between js and ts?",
+      "solutions": []
+    },
+    {
+      "id": "86b2",
+      "username": "sam",
+      "question": "            ",
+      "solutions": []
     }
   ]
 }

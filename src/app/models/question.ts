@@ -1,7 +1,7 @@
 import { Solution } from "./solution";
 
 export interface Question{
-    id:string;
+    id?:string;
     username:string;
     question:string;
     solutions?:Solution[];

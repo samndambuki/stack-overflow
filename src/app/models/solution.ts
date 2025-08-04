@@ -1,5 +1,5 @@
 export interface Solution{
-    id:string;
+    id?:string;
     username:string;
     upvotes:number;
     downvotes:number;

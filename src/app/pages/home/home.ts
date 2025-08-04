@@ -37,10 +37,9 @@ post(){
   if(this.questionForm.valid && this.userService.user()?.username){
     this.isLoading.set(true);
     const newQuestion:Question = {
-      id:'',
       username:this.userService.user()?.username ?? '',
       question:this.questionForm.get('questionInput')?.value ?? '',
-      // solutions:[]
+      solutions:[]
     }
     this.questionService.postQuestion(newQuestion).pipe(
       catchError((err)=>{
