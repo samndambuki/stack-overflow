@@ -1,21 +1,7 @@
-<!-- <div class="container d-flex flex-column justify-content-center align-items-center mt-4 card p-4 gap-3" style="width: 40rem;">
-<div class="mb-3 mt-2">
-   <h6 class="fw-bold">Ask your question</h6>
-  <textarea [(ngModel)]="question" class="form-control" id="questiontxtarea" rows="3"></textarea>
-</div>
-{{question}}
-<button type="button" class="btn btn-primary">Post</button>
-<div class="card mt-2 m-4">
-  <div class="card-body">
-    <p class="fw-semibold">Samuel Ndambuki</p>
-    <p class="card-text">This is my question</p>
-  </div>
-</div>
-</div> -->
 <div class="container-fluid py-4">
   <div class="card shadow-sm mx-auto" style="max-width: 600px;">
     <div class="card-body">
-      <h3 class="card-title text-center mb-4">Ask a Question</h3>
+      <h3 class="card-title text-center mb-4 fs-5">Ask a Question</h3>
       <form [formGroup]="questionForm" (ngSubmit)="post()">
         <div class="mb-3">
           <label for="questionInput" class="form-label fw-bold">Your Question</label>
@@ -63,15 +49,15 @@
     </div>
   </div>
 
-  <div class="mt-5">
-    <h4 class="mb-3">Recent Questions</h4>
+  <div class="card mt-5 p-4 shadow-md">
+    <h4 class="mb-3 fs-6">Recent Questions</h4>
     @if (questionsList().length === 0) {
       <p class="text-muted">No questions yet. Be the first to ask!</p>
     } @else {
       <div class="list-group">
         @for (question of questionsList(); track question.id) {
           <div class="list-group-item list-group-item-action">
-            <h5 class="mb-1">{{ question.question }}</h5>
+            <h5 class="mb-1 fs-6">{{ question.question }}</h5>
             <p class="mb-1 text-muted">Asked by {{ question.username }}</p>
             <small>Solutions: {{ question.solutions?.length }}</small>
           </div>

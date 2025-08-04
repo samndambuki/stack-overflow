@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { QuestionService } from '../../services/question-service';
 import { Question } from '../../models/question';
@@ -12,11 +12,18 @@ import { catchError, of } from 'rxjs';
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
-export class Home {
+export class Home implements OnInit {
 questionsList = signal<Question[]>([]);
 errorMessage = signal<string|null>(null);
 isLoading = signal<boolean>(false);
 
+ngOnInit(): void {
+  this.questionService.getQuestions().subscribe({
+    next:(questions)=>{
+      this.questionsList.set(questions);
+    }
+  })
+}
 
 questionForm = new FormGroup({
   questionInput : new FormControl('',[Validators.required,Validators.minLength(3)])
@@ -58,4 +65,5 @@ post(){
     this.errorMessage.set('Please enter a valid question')
   }
 }
+
 }

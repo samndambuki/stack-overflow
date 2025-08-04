@@ -12,4 +12,7 @@ export class QuestionService {
   postQuestion(question:Question):Observable<Question>{
     return this.http.post<Question>(`${this.baseUrl}/questions`,question)
   }
+  getQuestions():Observable<Question[]>{
+    return this.http.get<Question[]>(`${this.baseUrl}/questions`)
+  }
 }
