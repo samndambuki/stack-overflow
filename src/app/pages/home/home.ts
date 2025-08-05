@@ -5,10 +5,11 @@ import { QuestionService } from '../../services/question-service';
 import { Question } from '../../models/question';
 import { UserService } from '../../services/user-service';
 import { catchError, of } from 'rxjs';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,RouterModule],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })

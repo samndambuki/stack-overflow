@@ -56,10 +56,10 @@
     } @else {
       <div class="list-group">
         @for (question of questionsList(); track question.id) {
-          <div class="list-group-item list-group-item-action">
+          <div class="list-group-item list-group-item-action" [routerLink]="['/view-solutions',question.id]">
             <h5 class="mb-1 fs-6">{{ question.question }}</h5>
             <p class="mb-1 text-muted">Asked by {{ question.username }}</p>
-            <small>Solutions: {{ question.solutions?.length }}</small>
+            <!-- <small>Solutions: {{ question.solutions?.length }}</small> -->
           </div>
         }
       </div>
