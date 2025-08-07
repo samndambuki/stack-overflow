@@ -17,7 +17,30 @@
     {
       "id": "1001",
       "username": "sam",
-      "question": "what is your favorite programming language?"
+      "question": "what is your favorite programming language?",
+      "solutions": [
+        {
+          "username": "",
+          "answer": "this is my solution",
+          "upvotes": 0,
+          "downvotes": 2,
+          "id": "s92muaio8j",
+          "voters": {
+            "": "downvote",
+            "samuel": "downvote"
+          }
+        },
+        {
+          "username": "samuel",
+          "answer": "typescript",
+          "upvotes": 1,
+          "downvotes": 0,
+          "id": "s3jqb8nmej",
+          "voters": {
+            "samuel": "upvote"
+          }
+        }
+      ]
     },
     {
       "id": "1002",
