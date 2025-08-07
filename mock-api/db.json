@@ -15,22 +15,22 @@
   ],
   "questions": [
     {
-      "id": "",
-      "username": "",
+      "id": "1001",
+      "username": "sam",
       "question": "what is your favorite programming language?"
     },
     {
-      "id": "",
+      "id": "1002",
       "username": "sam",
       "question": "why is typescript used in angular?"
     },
     {
-      "id": "",
+      "id": "1003",
       "username": "sam",
       "question": "what is spring framework?"
     },
     {
-      "id": "",
+      "id": "1004",
       "username": "sam",
       "question": "is java used in spring?",
       "solutions": []
@@ -38,14 +38,32 @@
     {
       "id": "22dc",
       "username": "sam",
-      "question": "what is the diffeence between js and ts?",
+      "question": "what is the difference between js and ts?",
       "solutions": []
     },
     {
       "id": "86b2",
       "username": "sam",
-      "question": "            ",
-      "solutions": []
+      "question": "what is the difference between angular and react?",
+      "solutions": [
+        {
+          "username": "",
+          "answer": "angular is a framework while react is a library.",
+          "upvotes": 7,
+          "downvotes": 4,
+          "id": "s7hopmrhy4"
+        },
+        {
+          "username": "",
+          "answer": "angular is a library while react is a framework.",
+          "upvotes": 1,
+          "downvotes": 0,
+          "id": "stkp1nkiiz",
+          "voters": {
+            "": "upvote"
+          }
+        }
+      ]
     }
   ]
 }

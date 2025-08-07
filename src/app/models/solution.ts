@@ -1,7 +1,8 @@
-export interface Solution{
-    id?:string;
-    username:string;
-    upvotes:number;
-    downvotes:number;
-    answer:string;
+export interface Solution {
+    id?: string;
+    username: string;
+    upvotes: number;
+    downvotes: number;
+    answer: string;
+    voters?: { [username: string]: 'upvote' | 'downvote' };
 }
