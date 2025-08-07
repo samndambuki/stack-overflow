@@ -32,13 +32,13 @@
       "id": "1002",
       "username": "sam",
       "question": "why is typescript used in angular?",
-      "solutions":[]
+      "solutions": []
     },
     {
       "id": "1003",
       "username": "sam",
       "question": "what is spring framework?",
-      "solutions":[]
+      "solutions": []
     },
     {
       "id": "1004",
@@ -50,7 +50,18 @@
       "id": "22dc",
       "username": "sam",
       "question": "what is the difference between js and ts?",
-      "solutions": []
+      "solutions": [
+        {
+          "username": "sam",
+          "answer": "js is dynamically typed\nts is statically typed",
+          "upvotes": 1,
+          "downvotes": 0,
+          "id": "syer2l5y4v",
+          "voters": {
+            "sam": "upvote"
+          }
+        }
+      ]
     },
     {
       "id": "86b2",

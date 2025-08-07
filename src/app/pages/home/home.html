@@ -1,10 +1,12 @@
 <div class="container-fluid py-4">
-  <div class="card shadow-sm mx-auto" style="max-width: 600px;">
+  <div class="card shadow-sm mx-auto" style="max-width: 600px">
     <div class="card-body">
       <h3 class="card-title text-center mb-4 fs-6">Ask a Question</h3>
       <form [formGroup]="questionForm" (ngSubmit)="post()">
         <div class="mb-3">
-          <label for="questionInput" class="form-label fw-semibold fs-6">Your Question</label>
+          <label for="questionInput" class="form-label fw-semibold fs-6"
+            >Your Question</label
+          >
           <textarea
             id="questionInput"
             formControlName="questionInput"
@@ -15,15 +17,16 @@
               'is-invalid': questionForm.get('questionInput')?.invalid && (questionForm.get('questionInput')?.touched || questionForm.get('questionInput')?.dirty)
             }"
           ></textarea>
-          @if (questionForm.get('questionInput')?.invalid && (questionForm.get('questionInput')?.touched || questionForm.get('questionInput')?.dirty)) {
-            <div class="invalid-feedback">
-              @if (questionForm.get('questionInput')?.errors?.['required']) {
-                <div>Question is required</div>
-              }
-              @if (questionForm.get('questionInput')?.errors?.['minlength']) {
-                <div>Question must be at least 3 characters long</div>
-              }
-            </div>
+          @if (questionForm.get('questionInput')?.invalid &&
+          (questionForm.get('questionInput')?.touched ||
+          questionForm.get('questionInput')?.dirty)) {
+          <div class="invalid-feedback">
+            @if (questionForm.get('questionInput')?.errors?.['required']) {
+            <div>Question is required</div>
+            } @if (questionForm.get('questionInput')?.errors?.['minlength']) {
+            <div>Question must be at least 3 characters long</div>
+            }
+          </div>
           }
         </div>
         <div class="text-center">
@@ -33,17 +36,18 @@
             [disabled]="questionForm.invalid || isLoading()"
           >
             @if (isLoading()) {
-              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-              Posting...
-            } @else {
-              Post Question
-            }
+            <span
+              class="spinner-border spinner-border-sm me-2"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Posting... } @else { Post Question }
           </button>
         </div>
         @if (errorMessage()) {
-          <div class="alert alert-danger mt-3" role="alert">
-            {{ errorMessage() }}
-          </div>
+        <div class="alert alert-danger mt-3" role="alert">
+          {{ errorMessage() }}
+        </div>
         }
       </form>
     </div>
@@ -52,16 +56,19 @@
   <div class="card mt-5 p-4 shadow-md">
     <h4 class="mb-3 fs-6">Recent Questions</h4>
     @if (questionsList().length === 0) {
-      <p class="text-muted">No questions yet. Be the first to ask!</p>
+    <p class="text-muted">No questions yet. Be the first to ask!</p>
     } @else {
-      <div class="list-group">
-        @for (question of questionsList(); track question.id) {
-          <div class="list-group-item list-group-item-action" [routerLink]="['/view-solutions',question.id]">
-            <h5 class="mb-1 fs-6">{{ question.question }}</h5>
-            <p class="mb-1 text-muted">Asked by {{ question.username }}</p>
-          </div>
-        }
+    <div class="list-group">
+      @for (question of questionsList(); track question.id) {
+      <div
+        class="list-group-item list-group-item-action"
+        [routerLink]="['/view-solutions',question.id]"
+      >
+        <h5 class="mb-1 fs-6">{{ question.question }}</h5>
+        <p class="mb-1 text-muted">Asked by {{ question.username }}</p>
       </div>
+      }
+    </div>
     }
   </div>
 </div>

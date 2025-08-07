@@ -1,134 +1,140 @@
 <div class="container-fluid py-4">
   <div class="mb-4">
-    <button class="btn btn-outline-primary d-inline-flex align-items-center rounded-pill px-3 py-1" [routerLink]="['/home']">
+    <button
+      class="btn btn-outline-primary d-inline-flex align-items-center rounded-pill px-3 py-1"
+      [routerLink]="['/home']"
+    >
       <i class="bi bi-arrow-left me-2"></i> Back to previous page
     </button>
   </div>
 
   <!-- Loading State -->
   @if (isLoading()) {
-    <div class="text-center py-4">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+  <div class="text-center py-4">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
+  </div>
   }
 
   <!-- Question Display -->
   @if (currentQuestion() && !isLoading()) {
-    <div class="mb-4">
-      <h5 class="fw-semibold fs-6">{{ currentQuestion()?.question }}</h5>
-      <small class="text-muted">Asked by {{ currentQuestion()?.username }}</small>
+  <div class="mb-4">
+    <h5 class="fw-semibold fs-6">{{ currentQuestion()?.question }}</h5>
+    <small class="text-muted">Asked by {{ currentQuestion()?.username }}</small>
+  </div>
+
+  <!-- Solutions List -->
+  <div class="mb-4">
+    <h6 class="fw-semibold mb-3">Solutions ({{ solutions().length }})</h6>
+
+    @if (solutions().length === 0) {
+    <div class="alert alert-info">
+      <i class="bi bi-info-circle me-2"></i>
+      No solutions posted yet. Be the first to help!
     </div>
-
-    <!-- Solutions List -->
-    <div class="mb-4">
-      <h6 class="fw-semibold mb-3">Solutions ({{ solutions().length }})</h6>
-      
-      @if (solutions().length === 0) {
-        <div class="alert alert-info">
-          <i class="bi bi-info-circle me-2"></i>
-          No solutions posted yet. Be the first to help!
-        </div>
-      }
-
-      @for (solution of solutions(); track solution.id) {
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="d-flex">
-              <div class="d-flex flex-column align-items-center me-4">
-                <button 
-  class="btn btn-sm mb-1" 
-  [class.btn-success]="hasUserUpvoted(solution)"
-  [class.btn-outline-success]="!hasUserUpvoted(solution)"
-  title="Upvote"
-  (click)="upvoteSolution(solution.id!)">
-  <i class="bi bi-hand-thumbs-up"></i>
-</button>
-<span class="fw-bold fs-6">{{ solution.upvotes - solution.downvotes }}</span>
-<button 
-  class="btn btn-sm mt-1" 
-  [class.btn-danger]="hasUserDownvoted(solution)"
-  [class.btn-outline-danger]="!hasUserDownvoted(solution)"
-  title="Downvote"
-  (click)="downvoteSolution(solution.id!)">
-  <i class="bi bi-hand-thumbs-down"></i>
-</button>
-              </div>
-              <div class="flex-grow-1">
-                <p class="mb-2">{{ solution.answer }}</p>
-                <div class="text-muted small">
-                  — {{ solution.username }}
-                  <span class="ms-2">
-                    <i class="bi bi-hand-thumbs-up me-1"></i>{{ solution.upvotes }}
-                    <i class="bi bi-hand-thumbs-down ms-2 me-1"></i>{{ solution.downvotes }}
-                  </span>
-                </div>
-              </div>
+    } @for (solution of solutions(); track solution.id) {
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="d-flex">
+          <div class="d-flex flex-column align-items-center me-4">
+            <button
+              class="btn btn-sm mb-1"
+              [class.btn-success]="hasUserUpvoted(solution)"
+              [class.btn-outline-success]="!hasUserUpvoted(solution)"
+              title="Upvote"
+              (click)="upvoteSolution(solution.id!)"
+            >
+              <i class="bi bi-hand-thumbs-up"></i>
+            </button>
+            <span class="fw-bold fs-6"
+              >{{ solution.upvotes - solution.downvotes }}</span
+            >
+            <button
+              class="btn btn-sm mt-1"
+              [class.btn-danger]="hasUserDownvoted(solution)"
+              [class.btn-outline-danger]="!hasUserDownvoted(solution)"
+              title="Downvote"
+              (click)="downvoteSolution(solution.id!)"
+            >
+              <i class="bi bi-hand-thumbs-down"></i>
+            </button>
+          </div>
+          <div class="flex-grow-1">
+            <p class="mb-2">{{ solution.answer }}</p>
+            <div class="text-muted small">
+              — {{ solution.username }}
+              <span class="ms-2">
+                <i class="bi bi-hand-thumbs-up me-1"></i>{{ solution.upvotes }}
+                <i class="bi bi-hand-thumbs-down ms-2 me-1"></i>{{
+                solution.downvotes }}
+              </span>
             </div>
           </div>
         </div>
-      }
-    </div>
-
-    <!-- Post Solution Form -->
-    <div class="card">
-      <div class="card-body">
-        <h6 class="fw-semibold mb-3">Post a Solution</h6>
-        
-        <!-- Success/Error Messages -->
-        @if (successMessage()) {
-          <div class="alert alert-success alert-dismissible">
-            <i class="bi bi-check-circle me-2"></i>{{ successMessage() }}
-          </div>
-        }
-        
-        @if (errorMessage()) {
-          <div class="alert alert-danger alert-dismissible">
-            <i class="bi bi-exclamation-triangle me-2"></i>{{ errorMessage() }}
-          </div>
-        }
-
-        <form [formGroup]="solutionForm" (ngSubmit)="postSolution()">
-          <div class="mb-3">
-            <textarea 
-              class="form-control" 
-              rows="5" 
-              placeholder="Write your solution here... (minimum 10 characters)"
-              formControlName="solutionInput"
-              [class.is-invalid]="solutionForm.get('solutionInput')?.invalid && solutionForm.get('solutionInput')?.touched">
-            </textarea>
-            @if (solutionForm.get('solutionInput')?.invalid && solutionForm.get('solutionInput')?.touched) {
-              <div class="invalid-feedback">
-                @if (solutionForm.get('solutionInput')?.errors?.['required']) {
-                  Solution is required.
-                }
-                @if (solutionForm.get('solutionInput')?.errors?.['minlength']) {
-                  Solution must be at least 10 characters long.
-                }
-              </div>
-            }
-          </div>
-          <button 
-            type="submit" 
-            class="btn btn-primary"
-            [disabled]="solutionForm.invalid || isSubmitting()">
-            @if (isSubmitting()) {
-              <span class="spinner-border spinner-border-sm me-2" role="status"></span>
-              Posting...
-            } @else {
-              <i class="bi bi-send me-1"></i> Post Solution
-            }
-          </button>
-        </form>
       </div>
     </div>
+    }
+  </div>
+
+  <!-- Post Solution Form -->
+  <div class="card">
+    <div class="card-body">
+      <h6 class="fw-semibold mb-3">Post a Solution</h6>
+
+      <!-- Success/Error Messages -->
+      @if (successMessage()) {
+      <div class="alert alert-success alert-dismissible">
+        <i class="bi bi-check-circle me-2"></i>{{ successMessage() }}
+      </div>
+      } @if (errorMessage()) {
+      <div class="alert alert-danger alert-dismissible">
+        <i class="bi bi-exclamation-triangle me-2"></i>{{ errorMessage() }}
+      </div>
+      }
+
+      <form [formGroup]="solutionForm" (ngSubmit)="postSolution()">
+        <div class="mb-3">
+          <textarea
+            class="form-control"
+            rows="5"
+            placeholder="Write your solution here... (minimum 10 characters)"
+            formControlName="solutionInput"
+            [class.is-invalid]="solutionForm.get('solutionInput')?.invalid && solutionForm.get('solutionInput')?.touched"
+          >
+          </textarea>
+          @if (solutionForm.get('solutionInput')?.invalid &&
+          solutionForm.get('solutionInput')?.touched) {
+          <div class="invalid-feedback">
+            @if (solutionForm.get('solutionInput')?.errors?.['required']) {
+            Solution is required. } @if
+            (solutionForm.get('solutionInput')?.errors?.['minlength']) {
+            Solution must be at least 3 characters long. }
+          </div>
+          }
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="solutionForm.invalid || isSubmitting()"
+        >
+          @if (isSubmitting()) {
+          <span
+            class="spinner-border spinner-border-sm me-2"
+            role="status"
+          ></span>
+          Posting... } @else {
+          <i class="bi bi-send me-1"></i> Post Solution }
+        </button>
+      </form>
+    </div>
+  </div>
   }
 
   <!-- Error State -->
   @if (errorMessage() && !currentQuestion() && !isLoading()) {
-    <div class="alert alert-danger">
-      <i class="bi bi-exclamation-triangle me-2"></i>{{ errorMessage() }}
-    </div>
+  <div class="alert alert-danger">
+    <i class="bi bi-exclamation-triangle me-2"></i>{{ errorMessage() }}
+  </div>
   }
 </div>
